@@ -17,14 +17,14 @@ py -m pip install --user virtualenv
 cd api && py -m virtualenv env
 ```
 5. Using the virtualenv
-  - To activate
-  ```bash
-  .\env\Scripts\activate
-  ```
-  - to deactivate
-  ```bash
-  deactivate
-  ```
+    - To activate
+    ```bash
+    .\env\Scripts\activate
+    ```
+    - to deactivate
+    ```bash
+    deactivate
+    ```
 
 ## Linux Setup (the correct OS)
 1. Download python 3.6 (you probably already have it)
@@ -42,37 +42,37 @@ python3 -m pip install --user virtualenv
 cd api && python3 -m virtualenv env
 ```
 5. Using the virtualenv
-  - To activate
-  ```bash
-  source env/bin/activate
-  ```
-  - to deactivate
-  ```bash
-  deactivate
-  ```
+    - To activate
+    ```bash
+    source env/bin/activate
+    ```
+    - to deactivate
+    ```bash
+    deactivate
+    ```
 
 ## TempleOS (jk)
 
 # Developing
 
 1. Activate your virtualenv
-  - Windows
-  ```bash
-  cd api && .\env\Scripts\activate
-  ```
-  - Linux
-  ```bash
-  cd api && source env/bin/activate
-  ```
-2. In your virtualenv
-  1. Install requirements
-  ```bash
-  pip install -r requirements.txt
-  ```
-  2. If you've added reqs, you can either manually add your deps to the requirements.txt file, or "freeze" your current env into the file:
-  ```bash
-  pip freeze > requirements.txt
-  ```
+    * Windows
+    ```bash
+    cd api && .\env\Scripts\activate
+    ```
+    * Linux
+    ```bash
+    cd api && source env/bin/activate
+    ```
+2. In your virtualenv:
+    1. Install requirements
+    ```bash
+    pip install -r requirements.txt
+    ```
+    2. If you've added reqs, you can either manually add your deps to the requirements.txt file, or "freeze" your current env into the file:
+    ```bash
+    pip freeze > requirements.txt
+    ```
 3. Run the server
 ```bash
 python api.py
