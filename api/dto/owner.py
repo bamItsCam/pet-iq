@@ -1,17 +1,14 @@
 #!/usr/bin/env python3
 
-# DTO - data transfer object. Takes data from db models and concats strips or formats the data. Useful when combining data from multiple tables.
+from api.models.owner import Owner
+from api.dto.dog import DogDTO
 
-from models.owner import model
-
-class Owner():
-	def get(self, id=None):
-		if id:
-			return str(model.get(int(id)))
-		else:
-			return ''.join(model.get(None))
-
-	def create(self, username):
-		return str(model.write(username))
-
-dto = Owner()
+class OwnerDTO():
+	def __init__(self,owner: Owner):
+		self.id = owner.id
+		self.name  = " ".join([owner.firstname,owner.lastname])
+		self.email = owner.email
+		self.username = owner.username
+		# The DTO should not ever reveal the owner's password hash!
+		# DTO's should only contain lists of other DTO objects, NEVER models
+		self.dogs = [DogDTO(d) for d in owner.dogs]
