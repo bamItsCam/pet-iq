@@ -1,26 +1,15 @@
-#!/usr/bin/env python3
+from api import db
 
-import os.path
-# model wraps around the database, one class per table. Will control schema, column types, etc
+class Owner(db.Model):
+	__tablename__ = 'owners'
+	id = db.Column(db.Integer, primary_key=True)
+	username = db.Column(db.String(64), index=True, unique=True)
+	firstname = db.Column(db.String(128))
+	lastname = db.Column(db.String(128))
+	username = db.Column(db.String(64), index=True, unique=True)
+	email = db.Column(db.String(120), index=True, unique=True)
+	password_hash = db.Column(db.String(128))
+	dogs = db.relationship('Dog', backref='owners', lazy='dynamic')
 
-# do as I say, not as I do. This will eventually be a db
-# model/wrapper, but files are easier (kinda), so do this atm
-
-dbFile = "mock_db.txt"
-
-class Owner():
-	def get(self, lineNumber):
-		if lineNumber:
-			with open(dbFile, "r+") as f:
-				lines = f.readlines()
-				return lines[lineNumber - 1]
-
-		else:
-			with open(dbFile, "r+") as f:
-				return f.readlines()
-
-	def write(self, username):
-		with open(dbFile, "a+") as f:
-			return f.write("%s\n" % username)
-
-model = Owner()
+	def __repr__(self):
+		return '<Owner {}>'.format(self.username)
