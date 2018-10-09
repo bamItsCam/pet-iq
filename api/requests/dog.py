@@ -3,7 +3,7 @@ from flask_restful import Resource, Api, reqparse
 
 api = Api(app)
 
-class DogCreation():
+class DogRequest():
     parser = reqparse.RequestParser()
     parser.add_argument('name',
                         type=string,
@@ -21,4 +21,4 @@ class DogCreation():
         dog_data = {"name": data['name'], "breed", data['breed']}
         return dog_data, 201
 
-api.add_resource(Item, '/item/<string:name>')
+api.add_resource(DogCreation, '/dog')
