@@ -5,6 +5,8 @@ from flask import request
 from api import app
 from api.controllers.owner import OwnerController as Owner
 from api.requests.owner import OwnerRequests as ownerReq
+from api.controllers.dog import DogController as Dog
+from api.requests.dog import DogRequests as dogReq
 import json
 
 v1Root = "/api/v1/"
@@ -15,14 +17,13 @@ v1Root = "/api/v1/"
 def hello():
 	return "Hi"
 
-
+# Owner routes
 @app.route(v1Root + "owner", methods=['GET', 'POST'])
 def owner():
 	if request.method == 'GET':
 		return marshal(Owner.getList())
 	else:
-		return marshal(Owner.create2(unmarshal(request, ownerReq)))
-
+		return marshal(Owner.create(unmarshal(request, ownerReq)))
 
 @app.route(v1Root + "owner/<id>", methods=['GET','DELETE'])
 def ownerId(id):
@@ -31,6 +32,25 @@ def ownerId(id):
 	else:
 		return marshal(Owner.delete(id))
 
+# Dog routes		
+@app.route(v1Root + "dogs/<ownerId>", methods=['GET'])
+def ownerDogs():
+	if request.method == 'GET':
+		return marshal(Dog.getDogs())
+
+@app.route(v1Root + "dog", methods=['GET', 'POST'])
+def dog():
+	if request.method == 'GET':
+		return marshal(Dog.getList())
+	else:
+		return marshal(Dog.create(unmarshal(request, dogReq)))
+
+@app.route(v1Root + "dog/<id>", methods=['GET','DELETE'])
+def dogId(id):
+	if request.method == 'GET':
+		return marshal(Dog.getOwner(id))
+	else:
+		return marshal(Dog.delete(id))
 
 #helpers (to be moved)
 
@@ -46,5 +66,7 @@ def marshal(object):
 def unmarshal(request, className):
 	# unmarshaling the request body would be responsible for catching
 	# key errors, aka
+	print(request)
+	print(className)
 	dict = request.get_json()
 	return className(**dict)
