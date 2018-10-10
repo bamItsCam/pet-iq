@@ -1,4 +1,5 @@
 from api import db
+from api.models.owner import Owner
 
 class Dog(db.Model):
 	__tablename__ = 'dogs'
