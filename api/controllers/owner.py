@@ -16,18 +16,9 @@ class OwnerController():
 	def getOwner(id):
 		return OwnerDTO(Owner.query.get(id))
 
-	def create2(r: OwnerRequests):
+	def create(r: OwnerRequests):
 		h = str(hashlib.md5(r.password.encode()))
 		o = Owner(firstname="", lastname="", username=r.username, email=r.email, password_hash=h)
-		db.session.add(o)
-		db.session.commit()
-		return OwnerDTO(o)
-
-	def create(_username, _email, _password,_firstname="",_lastname=""):
-		# We should be sanitizing the input here before we save it to our database...
-		# and not be using md5. rainbows people.
-		h = str(hashlib.md5(_password.encode()))
-		o = Owner(firstname="", lastname="", username=_username, email=_email, password_hash = h)
 		db.session.add(o)
 		db.session.commit()
 		return OwnerDTO(o)
