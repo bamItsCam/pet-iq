@@ -75,6 +75,7 @@ cd api && python3 -m virtualenv env
     ```
     3. Update the database to the lastest migration (draws from whatever migrations are stored in the api/migrations folder)
     ```bash
+    flask db migrate
     flask db upgrade
     ```
     4. More info for working with the database (such as performing a migration) can be found here: https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database

@@ -1,36 +1,42 @@
 #!/usr/bin/env python3
 
-# processes data from the dto and hands it to the router.
+# processes data from the model and hands it to the router.
 # Heavy logic/lifting should be done here or by helpers of controllers (e.g. engines)
 
 from api import db
 from api.models.dog import Dog
 from api.models.owner import Owner
-from api.dto.dog import DogDTO
-from api.requests.dog import DogRequests
+from api.schemas.dog import DogSchema
+from marshmallow import ValidationError
+from api.common.http import BadRequest, OkRequest
 
 class DogController():
 	def getList():
-		return [DogDTO(d) for d in Dog.query.all()]
+		return OkRequest(DogSchema(many=True).dump(Dog.query.all()))
 
 	def getDogs(ownerId):
-		return [DogDTO(d) for d in Dog.query.filter(Dog.owner.id == ownerId)]
+		return okRequest(DogSchema(many=True).dump(Dog.query.filter(Dog.owner.id == ownerId)))
 
 	def getDog(id):
-		return DogDTO(Dog.query.get(id))
+		return OkRequest(DogSchema().dump(Dog.query.get(id)))
 
-	def create(r: DogRequests):
-		# Make sure the owner is actually real...
-		o = Owner.query.get(r.owner)		
-		if o is not None:
-			d = Dog(name=r.name, owner=o.id, breed = r.breed)
-			db.session.add(d)
-			db.session.commit()
-			return DogDTO(d)
-		return None
+	def create(respJson):
+		try:
+			valid = DogSchema().load(respJson)
+		except ValidationError as e:
+			return BadRequest(e.messages)
+		else:
+			# Make sure the owner is actually real...
+			o = Owner.query.get(valid['owner'])
+			if o:
+				d = Dog(name=valid['name'], owner=valid['id'], breed=valid['breed'])
+				db.session.add(d)
+				db.session.commit()
+				return OkRequest(DogSchema().dump(d))
+			return BadRequest("Owner not found")
 
 	def delete(id):
 		d = Dog.query.get(id)
 		db.session.delete(d)
 		db.session.commit()
-		return DogDTO(d)
+		return OkRequest("Deleted")
