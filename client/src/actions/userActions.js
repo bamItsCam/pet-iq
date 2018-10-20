@@ -7,7 +7,7 @@ export function loadUsersSuccess(cats) {
 
 export function loadUsers() {  
   return function(dispatch) {
-    return userApi.getAllCats().then(user => {
+    return userApi.getAllUsers().then(user => {
       dispatch(loadUsersSuccess(user));
     }).catch(error => {
       throw(error);

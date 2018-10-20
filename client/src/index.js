@@ -8,12 +8,12 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 // import reducer from './store'
-import rootReducer from '../reducers/rootReducer';
+import rootReducer from './reducers/rootReducer';
 import { loadUsers } from './actions/userActions';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = applyMiddleware(thunk)
-store = createStore(rootReducer, middleware);
+const store = createStore(rootReducer, middleware);
 store.dispatch(loadUsers())
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));

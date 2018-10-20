@@ -9,8 +9,8 @@ class UserApi {
         return response.data;
       }).catch(error => {
         return error;
-      });
-    }
+      })
+      }
 };
   
   export default UserApi;
