@@ -6,7 +6,7 @@ const UserList = ({users}) => {
       <ul className="list-group">
         {users.map(users => 
           <li className="list-group-item" key={users.id}>
-            {users.name}
+            {users.email}
           </li>
         )}
       </ul>

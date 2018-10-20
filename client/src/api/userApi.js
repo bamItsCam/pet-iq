@@ -7,7 +7,7 @@ class UserApi {
     static getAllUsers() {
       return axios.get(API + DEFAULT_QUERY).then(response => {
         console.log(response)
-        return response.data.content;
+        return response.data.content[0];
       }).catch(error => {
         return error;
       })
