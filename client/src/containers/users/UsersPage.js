@@ -1,5 +1,6 @@
-import React, {PropTypes, Component} from 'react';  
+import React, { Component} from 'react';  
 import {connect} from 'react-redux';  
+import PropTypes from 'prop-types';
 import * as userActions from '../../actions/userActions';
 import UserList from './UserList';
 
@@ -17,9 +18,9 @@ class UserPage extends Component {
 }
 
 
-// UserPage.propTypes = {
-//     users: PropTypes.array.isRequired
-// };
+UserPage.propTypes = {
+    users: PropTypes.array.isRequired
+};
 
 const mapStateToProps = state => {
   return {

@@ -6,7 +6,8 @@ const DEFAULT_QUERY = 'owner'
 class UserApi {  
     static getAllUsers() {
       return axios.get(API + DEFAULT_QUERY).then(response => {
-        return response.data;
+        console.log(response)
+        return response.data.content;
       }).catch(error => {
         return error;
       })
