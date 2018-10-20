@@ -1,7 +1,7 @@
 import React, {PropTypes, Component} from 'react';  
 import {connect} from 'react-redux';  
 import * as userActions from '../../actions/userActions';
-// import CatList from './CatList';
+import UserList from './UserList';
 
 class UserPage extends Component {  
   render() {
@@ -9,7 +9,7 @@ class UserPage extends Component {
       <div className="col-md-12">
         <h1>Users</h1>
         <div className="col-md-4">
-          {this.props.users}
+          <UserList users={this.props.urs} />
         </div>
       </div>
     );
@@ -17,14 +17,21 @@ class UserPage extends Component {
 }
 
 
-UserPage.propTypes = {
-    users: PropTypes.array.isRequired
+// UserPage.propTypes = {
+//     users: PropTypes.array.isRequired
+// };
+
+const mapStateToProps = state => {
+  return {
+    urs: state.users
+  };
 };
 
-function mapStateToProps(state, ownProps) {
-    return {
-        users: state.users
-      };
-    } 
+
+// function mapStateToProps(state, ownProps) {
+//     return {
+//         users: state.users
+//       };
+//     } 
 
 export default connect(mapStateToProps)(UserPage);  

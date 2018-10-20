@@ -1,8 +1,8 @@
 import userApi from '../api/userApi';
 import * as types from './actionTypes';  
 
-export function loadUsersSuccess(cats) {  
-  return {type: types.LOAD_USERS_SUCCESS, cats};
+export function loadUsersSuccess(users) {  
+  return {type: types.LOAD_USERS_SUCCESS, users};
 }
 
 export function loadUsers() {  
