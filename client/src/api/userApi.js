@@ -5,11 +5,12 @@ const DEFAULT_QUERY = 'owner'
 
 class UserApi {  
     static getAllUsers() {
-      return axois.get(API + DEFAULT_QUERY).then(response => {
+      return axios.get(API + DEFAULT_QUERY).then(response => {
         return response.data;
       }).catch(error => {
         return error;
       });
     }
+};
   
-  export default UserApi;  
+  export default UserApi;
