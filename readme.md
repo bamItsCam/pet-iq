@@ -83,4 +83,17 @@ cd api && python3 -m virtualenv env
 ```bash
 flask run
 ```
-4. $$$ Profit $$$
+
+4. Get the front-end working
+  install node by following [this link](https://nodejs.org/en/download/), the latest version will probably work
+
+5. install npm packages. npm is the node package manager (like pip for python). Do the following to install the packages
+```buildoutcfg
+cd client
+npm install
+```
+6. Now run the server with the command below. It will run on localhost:3000
+```buildoutcfg
+npm start
+```
+7. $$$ Profit $$$
