@@ -3,7 +3,6 @@
 # processes data from the model and hands it to the router.
 # Heavy logic/lifting should be done here or by helpers of controllers (e.g. engines)
 
-import json
 from api import db
 from api.models.owner import Owner
 from api.schemas.owner import OwnerSchema
